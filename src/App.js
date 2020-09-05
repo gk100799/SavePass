@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Users from './Components/Users'
+import AddUser from './Components/AddUser'
+import { connect } from 'react-redux'
+import { deleteUserAction, addUserAction } from './Actions/userActions'
 
-function App() {
+const App = (props) => {
+
+  
+  console.log(props);
+
+  // const addUser = (user) => {
+    // user.id = Math.random();
+    // let updatedUsers = [...users, user];
+    // setUsers(updatedUsers)
+  // }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="Heading" >Users</h1>
+      <Users users={props.users} deleteUser={props.deleteUser} />
+      <AddUser addUser={props.addUser} />
     </div>
-  );
+  )
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    users: state.users
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteUser: (id) => { dispatch(deleteUserAction(id)) },
+    addUser: (user) => { dispatch(addUserAction(user)) },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
