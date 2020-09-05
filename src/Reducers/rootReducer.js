@@ -1,7 +1,7 @@
 const initState = {
     users: [
-        { id: 1, username: 'Gopal Krishna', password: '123' },
-        { id: 2, username: 'Rajat Jain', password: '123' }
+        { id: 1, name: 'Google', username: 'Gopal Krishna', password: '123' },
+        { id: 2, name: 'Facebook', username: 'Rajat Jain', password: '123' }
     ]
 }
 

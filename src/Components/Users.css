@@ -3,3 +3,29 @@
     top: 100%;
     font-size: 12px;
   }
+.ant-table-container {
+      box-shadow: 0 30px 40px rgba(0,0,0,.07) !important; 
+}
+
+.table {
+    max-width: 80%;
+    text-align-last: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* .add-btn {
+    display: flex;
+    justify-content: flex-end !important;
+    margin-right: 60px;
+} */
+@media screen and (max-width: 992px) {
+    .table {
+        max-width:90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.ant-pagination {
+    display: none;
+}

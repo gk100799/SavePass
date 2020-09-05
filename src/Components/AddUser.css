@@ -1,0 +1,13 @@
+.ant-form-inline {
+    /* justify-content: center !important; */
+    /* display:inline; */
+}
+
+.form h1{
+    /* display:inline; */
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+}

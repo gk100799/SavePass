@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
+import { Button, Table, Input, InputNumber, Popconfirm, Form } from 'antd';
 import './Users.css'
 
 const EditableCell = ({
@@ -43,17 +43,18 @@ export default function Users({ users, deleteUser }) {
     const [form] = Form.useForm();
     const [data, setData] = useState(users);
     const [editingKey, setEditingKey] = useState('');
-    
+
     useEffect(() => {
         setData(users)
-    },[users])
-    
+    }, [users])
+
     const isEditing = record => record.id === editingKey;
 
     const edit = record => {
         form.setFieldsValue({
             username: '',
             password: '',
+            name: '',
             ...record,
         });
         setEditingKey(record.id);
@@ -84,7 +85,15 @@ export default function Users({ users, deleteUser }) {
         }
     };
 
+
     const columns = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            width: '20%',
+            editable: true,
+            sorter: (a, b) => a.name.localeCompare(b.name),
+        },
         {
             title: 'Username',
             dataIndex: 'username',
@@ -98,7 +107,7 @@ export default function Users({ users, deleteUser }) {
             editable: true,
         },
         {
-            title: 'operation',
+            title: 'Operations',
             width: '20%',
             dataIndex: 'operation',
             render: (_, record) => {
@@ -120,12 +129,29 @@ export default function Users({ users, deleteUser }) {
                         </Popconfirm>
                     </span>
                 ) : (
-                        <a disabled={editingKey !== ''} onClick={() => edit(record)}>
-                            Edit
-                        </a>
+                        <>
+                            <a disabled={editingKey !== ''} onClick={() => edit(record)}>
+                                Edit
+                            </a>
+                            <span style={{ whiteSpace: "pre" }}>                </span>
+                            <Popconfirm title="Sure to delete?" onConfirm={() => deleteUser(record.id)}>
+                                <a>Delete</a>
+                            </Popconfirm>
+                        </>
                     );
             },
         },
+        // {
+        //     title: 'Delete',
+        //     width: '20%',
+        //     dataIndex: 'operation',
+        //     render: (text, record) =>
+        //         data.length >= 1 ? (
+        //             <Popconfirm title="Sure to delete?" onConfirm={() => deleteUser(record.id)}>
+        //                 <a>Delete</a>
+        //             </Popconfirm>
+        //         ) : null,
+        // },
     ];
 
     const mergedColumns = columns.map(col => {
@@ -157,7 +183,8 @@ export default function Users({ users, deleteUser }) {
             <p className="noUsers">There are no Users to display!</p>
         )
     return (
-        <div>
+        <div className="table">
+
             {/* {userList} */}
             <Form form={form} component={false}>
                 <Table
@@ -170,11 +197,18 @@ export default function Users({ users, deleteUser }) {
                     dataSource={data}
                     columns={mergedColumns}
                     rowClassName="editable-row"
-                    // pagination={{
-                    //     onChange: cancel,
-                    // }}
+                // pagination={{
+                //     onChange: cancel,
+                // }}
                 />
             </Form>
+            {/* <br /> */}
+            {/* <br /> */}
+            {/* <div className="add-btn">
+                <Button type="primary" shape="round" icon={<add />} size="large">
+                    Add item
+                </Button>    */}
+            {/* </div> */}
         </div>
     )
 }

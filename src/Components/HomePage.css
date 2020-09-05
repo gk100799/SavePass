@@ -1,0 +1,18 @@
+.Heading {
+    text-align: center;
+  }
+  
+  .App {
+    margin-top: 20px;
+  }
+  
+  .logout {
+    /* display: flex;
+    justify-content: flex-end; */
+    text-align: end;
+    margin-right: 30px;
+  }
+  .headingAndAdd {
+    /* display: inline-table;
+    justify-content: flex-end; */
+  }

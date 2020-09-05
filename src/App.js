@@ -1,41 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
-import Users from './Components/Users'
-import AddUser from './Components/AddUser'
-import { connect } from 'react-redux'
-import { deleteUserAction, addUserAction } from './Actions/userActions'
+import HomePage from './Components/HomePage'
+import Login from './Components/Login'
+import NavBar from './Components/NavBar'
 
 const App = (props) => {
 
-  
-  console.log(props);
-
-  // const addUser = (user) => {
-    // user.id = Math.random();
-    // let updatedUsers = [...users, user];
-    // setUsers(updatedUsers)
-  // }
-
   return (
-    <div className="App">
-      <h1 className="Heading" >Users</h1>
-      <Users users={props.users} deleteUser={props.deleteUser} />
-      <AddUser addUser={props.addUser} />
-    </div>
+    <Router basename={process.env.PUBLIC_URL} >
+      <NavBar />
+      <Route path="/" exact component={HomePage} />
+      <Route path="/login" exact component={Login} />
+    </Router>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    users: state.users
-  }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteUser: (id) => { dispatch(deleteUserAction(id)) },
-    addUser: (user) => { dispatch(addUserAction(user)) },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
