@@ -1,5 +1,5 @@
 Live Application URL: https://gk100799.github.io/SavePass/
-Frontend Repository: https://github.com/gk100799/SavePass
+Backend Repository: https://github.com/gk100799/SavePass-Backend
 
 This Application helps the user store their login details of various applications that are used in day to day applications.
 
