@@ -13,16 +13,20 @@ import { axiosInstance, request } from '../helpers'
 const HomePage = (props) => {
     useEffect(() => {
         if (localStorage.getItem('token')) {
-            axiosInstance.get('account/')
+            request.get('account', {
+                headers: {
+                    "auth-token": localStorage.getItem('token'),
+                }
+            })
                 .then(res => {
                     props.setUsers(res.data)
                 })
         } else {
             props.history.push('/')
         }
-    }, [props]);
+    }, []);
 
-    return  (
+    return (
         <div className="App">
             <NavBar />
             {/* <div className="logout">
@@ -48,7 +52,7 @@ const HomePage = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.loggedIn)
+    // console.log(state.loggedIn)
     return {
         loggedIn: state.loggedIn
     }

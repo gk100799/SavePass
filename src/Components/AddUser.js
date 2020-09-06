@@ -19,7 +19,7 @@ export default function AddUser({ addUser }) {
     };
 
     const onFinish = values => {
-        console.log(values);
+        // console.log(values);
         const user = {
             name: values.name,
             username: values.username,

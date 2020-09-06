@@ -41,7 +41,7 @@ const EditableCell = ({
 
 function Users({ users, deleteUser }) {
 
-    console.log(users);
+    // console.log(users);
     const [form] = Form.useForm();
     const [data, setData] = useState(users);
     const [editingKey, setEditingKey] = useState('');
@@ -229,7 +229,7 @@ function Users({ users, deleteUser }) {
 }
 
 const mapStateToProps = (state, otherProps) => {
-    console.log(state.users)
+    // console.log(state.users)
     return {
         users: state.users,
         otherProps

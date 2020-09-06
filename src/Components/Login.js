@@ -11,8 +11,8 @@ const Login = (props) => {
     useEffect(() => {
         if (localStorage.getItem('token')) {
             axiosInstance.get('user/login/currentUser/')
-            .then(res => props.history.push('/home'))
-          }
+                .then(res => props.history.push('/home'))
+        }
     }, []);
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
@@ -21,9 +21,9 @@ const Login = (props) => {
             "password": values.password,
         }
         request.post('/user/login/', data)
-            .then(async(res) => {
+            .then(async (res) => {
                 await localStorage.setItem('token', res.data.token);
-                props.loggedUser({name: res.data.name, loggedIn:true})
+                props.loggedUser({ name: res.data.name, loggedIn: true })
             })
             .then(res => props.history.push('/home'))
             .then(res => message.success("Logged in successfully!"))
@@ -78,14 +78,14 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-    //   users: state.users
+        //   users: state.users
     }
-  }
-  
-  const mapDispatchToProps = (dispatch) => {
+}
+
+const mapDispatchToProps = (dispatch) => {
     return {
-      loggedUser: (data) => { dispatch(loggedUserAction(data)) },
+        loggedUser: (data) => { dispatch(loggedUserAction(data)) },
     }
-  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

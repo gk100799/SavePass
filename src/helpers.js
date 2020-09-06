@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// export const backendURL = "http://localhost:8000";
-export const backendURL = "http://localhost:4000";
+// export const backendURL = "http://localhost:4000";
+export const backendURL = "https://savepass-backend.herokuapp.com/";
 
 export const request = axios.create({
   baseURL: backendURL,
@@ -12,7 +12,7 @@ export const axiosInstance = axios.create({
   baseURL: backendURL,
   headers: {
     "Content-Type": "application/json",
-    "auth-token": `${localStorage.getItem('token')}`
+    "auth-token": localStorage.getItem('token')
   },
   timeout: 10000
 });
@@ -41,9 +41,9 @@ axiosInstance.interceptors.response.use(
     if (error.response.status === 408 || error.code === 'ECONNABORTED') {
         console.log(`A timeout happend on url ${error.config.url}`)
       }
-    if (error.response.status === 401 || error.code === 'Unauthorized') {
-      window.location.href = ""
-    }
+    // if (error.response.status === 401 || error.code === 'Unauthorized') {
+    //   window.location.href = ""
+    // }
     return error;
   }
 );
@@ -65,9 +65,9 @@ request.interceptors.response.use(
     if (error.response.status === 408 || error.code === 'ECONNABORTED') {
         console.log(`A timeout happend on url ${error.config.url}`)
       }
-    if (error.response.status === 401 || error.code === 'Unauthorized') {
-      window.location.href = "login"
-    }
+    // if (error.response.status === 401 || error.code === 'Unauthorized') {
+    //   window.location.href = "/"
+    // }
     return error;
   }
 );

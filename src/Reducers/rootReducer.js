@@ -18,7 +18,7 @@ export default function rootReducer(state = initState, action) {
 
     if(action.type === 'ADD_USER') {
         let user = action.user
-        console.log(user)
+        // console.log(user)
         user._id = Math.random()
         return {
             ...state,
@@ -27,7 +27,7 @@ export default function rootReducer(state = initState, action) {
     }
 
     if(action.type === 'LOGGED_USER') {
-        console.log(action.data)
+        // console.log(action.data)
         // user.id = Math.random()
         return {
             ...state,
@@ -37,7 +37,7 @@ export default function rootReducer(state = initState, action) {
     }
 
     if(action.type === 'SET_USERS') {
-        console.log(action.users,"yeah here you are")
+        // console.log(action.users,"yeah here you are")
         // user.id = Math.random()
         return {
             ...state,
