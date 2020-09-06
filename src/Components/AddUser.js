@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Radio } from 'antd';
+import { axiosInstance, request } from '../helpers'
 import './AddUser.css'
 
 export default function AddUser({ addUser }) {
 
     const [form] = Form.useForm();
-    
+
     const validateMessages = {
         required: '${label} is required!',
         types: {
@@ -24,13 +25,14 @@ export default function AddUser({ addUser }) {
             username: values.username,
             password: values.password
         }
-        addUser(user)
+        axiosInstance.post('/account/add', user)
+            .then(res => addUser(user))
         form.resetFields();
     };
 
     return (
         <div className="form">
-            <h3 style={{marginTop: '3px', marginRight: '30px'}} >Add Item:</h3>
+            <h3 style={{ marginTop: '3px', marginRight: '30px' }} >Add Item:</h3>
             <Form
                 form={form}
                 layout="inline"

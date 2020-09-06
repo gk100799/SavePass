@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Table, Input, InputNumber, Popconfirm, Form } from 'antd';
 import './Users.css'
+import { axiosInstance, request } from '../helpers'
+import { connect } from 'react-redux'
 
 const EditableCell = ({
     editing,
@@ -37,7 +39,7 @@ const EditableCell = ({
     );
 };
 
-export default function Users({ users, deleteUser }) {
+function Users({ users, deleteUser }) {
 
     console.log(users);
     const [form] = Form.useForm();
@@ -48,7 +50,7 @@ export default function Users({ users, deleteUser }) {
         setData(users)
     }, [users])
 
-    const isEditing = record => record.id === editingKey;
+    const isEditing = record => record._id === editingKey;
 
     const edit = record => {
         form.setFieldsValue({
@@ -57,7 +59,7 @@ export default function Users({ users, deleteUser }) {
             name: '',
             ...record,
         });
-        setEditingKey(record.id);
+        setEditingKey(record._id);
     };
 
     const cancel = () => {
@@ -67,24 +69,37 @@ export default function Users({ users, deleteUser }) {
     const save = async key => {
         try {
             const row = await form.validateFields();
-            const newData = [...data];
-            const index = newData.findIndex(item => key === item.id);
-
-            if (index > -1) {
-                const item = newData[index];
-                newData.splice(index, 1, { ...item, ...row });
-                setData(newData);
-                setEditingKey('');
-            } else {
-                newData.push(row);
-                setData(newData);
-                setEditingKey('');
+            const req = {
+                _id: key,
+                name: row.name,
+                username: row.username,
+                password: row.password
             }
-        } catch (errInfo) {
+            axiosInstance.post('account/modify', req)
+                .then(res => {
+                    const newData = [...data];
+                    const index = newData.findIndex(item => key === item._id);
+
+                    if (index > -1) {
+                        const item = newData[index];
+                        newData.splice(index, 1, { ...item, ...row });
+                        setData(newData);
+                        setEditingKey('');
+                    } else {
+                        newData.push(row);
+                        setData(newData);
+                        setEditingKey('');
+                    }
+                })
+            } catch (errInfo) {
             console.log('Validate Failed:', errInfo);
         }
     };
 
+    const handleConfirm = (_id) => {
+        axiosInstance.post('account/delete', { _id: _id })
+            .then(res => deleteUser(_id))
+    }
 
     const columns = [
         {
@@ -117,7 +132,7 @@ export default function Users({ users, deleteUser }) {
                     <span>
                         <a
                             // href="javascript:;"
-                            onClick={() => save(record.id)}
+                            onClick={() => save(record._id)}
                             style={{
                                 marginRight: 8,
                             }}
@@ -134,7 +149,7 @@ export default function Users({ users, deleteUser }) {
                                 Edit
                             </a>
                             <span style={{ whiteSpace: "pre" }}>                </span>
-                            <Popconfirm title="Sure to delete?" onConfirm={() => deleteUser(record.id)}>
+                            <Popconfirm title="Sure to delete?" onConfirm={() => handleConfirm(record._id)}>
                                 <a>Delete</a>
                             </Popconfirm>
                         </>
@@ -147,7 +162,7 @@ export default function Users({ users, deleteUser }) {
         //     dataIndex: 'operation',
         //     render: (text, record) =>
         //         data.length >= 1 ? (
-        //             <Popconfirm title="Sure to delete?" onConfirm={() => deleteUser(record.id)}>
+        //             <Popconfirm title="Sure to delete?" onConfirm={() => deleteUser(record._id)}>
         //                 <a>Delete</a>
         //             </Popconfirm>
         //         ) : null,
@@ -171,17 +186,17 @@ export default function Users({ users, deleteUser }) {
         };
     });
 
-    const userList = users.length ? (
-        users.map(user => {
-            return (
-                <div className="userList" key={user.id}>
-                    <span onClick={() => { deleteUser(user.id) }}>{user.username}</span>
-                </div>
-            )
-        })
-    ) : (
-            <p className="noUsers">There are no Users to display!</p>
-        )
+    // const userList = users.length ? (
+    //     users.map(user => {
+    //         return (
+    //             <div className="userList" key={user._id}>
+    //                 <span onClick={() => { deleteUser(user._id) }}>{user.username}</span>
+    //             </div>
+    //         )
+    //     })
+    // ) : (
+    //         <p className="noUsers">There are no Users to display!</p>
+    //     )
     return (
         <div className="table">
 
@@ -212,3 +227,13 @@ export default function Users({ users, deleteUser }) {
         </div>
     )
 }
+
+const mapStateToProps = (state, otherProps) => {
+    console.log(state.users)
+    return {
+        users: state.users,
+        otherProps
+    }
+}
+
+export default connect(mapStateToProps)(Users);

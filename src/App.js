@@ -9,8 +9,8 @@ const App = (props) => {
 
   return (
     <Router basename={process.env.PUBLIC_URL} >
-      <Route path="/" exact component={HomePage} />
-      <Route path="/login" exact component={Login} />
+      <Route path="/home" exact component={HomePage} />
+      <Route path="/" exact component={Login} />
     </Router>
   )
 }
