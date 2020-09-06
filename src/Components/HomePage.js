@@ -5,18 +5,22 @@ import AddUser from './AddUser'
 import { connect } from 'react-redux'
 import { deleteUserAction, addUserAction } from '../Actions/userActions'
 import { Button } from 'antd'
+import NavBar from './NavBar'
 // import add from './add-button.svg'
 
 const HomePage = (props) => {
 
   return (
     <div className="App">
-      <div className="logout">
+        <NavBar />
+      {/* <div className="logout">
       <Button>
         Logout
-      </Button>
-      </div>
-      <h1 className="Heading" style={{ marginBottom: '40px' }}>DETAILS</h1>
+      </Button> */}
+      {/* </div> */}
+      {/* <h1 className="Heading" style={{ marginBottom: '40px' }}>DETAILS</h1> */}
+      <br/>
+      <br/>
       <AddUser addUser={props.addUser} />
       {/* <Button type="primary" shape="round" icon={<add />} size="large">
         Download
