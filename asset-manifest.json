@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/SavePass/static/css/main.f472f10f.chunk.css",
-    "main.js": "/SavePass/static/js/main.dc0359aa.chunk.js",
-    "main.js.map": "/SavePass/static/js/main.dc0359aa.chunk.js.map",
+    "main.js": "/SavePass/static/js/main.b057c4ae.chunk.js",
+    "main.js.map": "/SavePass/static/js/main.b057c4ae.chunk.js.map",
     "runtime-main.js": "/SavePass/static/js/runtime-main.d631ac19.js",
     "runtime-main.js.map": "/SavePass/static/js/runtime-main.d631ac19.js.map",
     "static/css/2.d4e7eff5.chunk.css": "/SavePass/static/css/2.d4e7eff5.chunk.css",
     "static/js/2.fbf44057.chunk.js": "/SavePass/static/js/2.fbf44057.chunk.js",
     "static/js/2.fbf44057.chunk.js.map": "/SavePass/static/js/2.fbf44057.chunk.js.map",
     "index.html": "/SavePass/index.html",
-    "precache-manifest.a443d3b8fe6516d84c4408c70b5f16a1.js": "/SavePass/precache-manifest.a443d3b8fe6516d84c4408c70b5f16a1.js",
+    "precache-manifest.1a9c58e4ee72cd6a065848bca4699bf4.js": "/SavePass/precache-manifest.1a9c58e4ee72cd6a065848bca4699bf4.js",
     "service-worker.js": "/SavePass/service-worker.js",
     "static/css/2.d4e7eff5.chunk.css.map": "/SavePass/static/css/2.d4e7eff5.chunk.css.map",
     "static/css/main.f472f10f.chunk.css.map": "/SavePass/static/css/main.f472f10f.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.d4e7eff5.chunk.css",
     "static/js/2.fbf44057.chunk.js",
     "static/css/main.f472f10f.chunk.css",
-    "static/js/main.dc0359aa.chunk.js"
+    "static/js/main.b057c4ae.chunk.js"
   ]
 }
